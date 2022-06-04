@@ -1,6 +1,7 @@
 from file_utils import join_path, list_recursively, delete_recursive, rename, delete
 from git_utils import clone_repo
 from log_utils import log
+from arg_parse import get_value_from_args
 
 class ApplicationSetup:
 
@@ -60,8 +61,13 @@ class ApplicationSetup:
         destination = join_path(self.projectDest, "app/src/main/java/tech/jknair/app/ui/"+self.projectName+"App.kt")
         rename(application_file_path, destination)
 
-projectName =  "MistyProject"
-projectDest = "/Users/jayakrishnannairkaarakulangara/testTrash/MistyProject"
+(projectName, projectDest) = get_value_from_args()
+# projectName =  "MistyProject" --projectName
+# projectDest = "/Users/jayakrishnannairkaarakulangara/testTrash/MistyProject" --projectDir
+
+log("projectName = {}".format(projectName))
+log("projectDest = {}".format(projectDest))
+
 template_repo_link = "https://github.com/jknair0/AppTemplate.git"
 
 clone_repo(template_repo_link, projectDest)

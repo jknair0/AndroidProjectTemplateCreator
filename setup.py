@@ -57,8 +57,8 @@ class ApplicationSetup:
             rename(srcPackage, join_path(projectDest, desPathPrefix + self.projectNameLower))
     
     def __change_application_class_name(self):
-        application_file_path = join_path(self.projectDest, "app/src/main/java/tech/jknair/app/ui/App.kt")
-        destination = join_path(self.projectDest, "app/src/main/java/tech/jknair/app/ui/"+self.projectName+"App.kt")
+        application_file_path = join_path(self.projectDest, "app/src/main/java/tech/jknair/app/App.kt")
+        destination = join_path(self.projectDest, "app/src/main/java/tech/jknair/app/"+self.projectName+"App.kt")
         rename(application_file_path, destination)
 
 (projectName, projectDest) = get_value_from_args()

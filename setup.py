@@ -5,8 +5,8 @@ from log_utils import log
 class ApplicationSetup:
 
     src_dirs_rel_path = ["app/src/main/java/tech/jknair/app", "app/src/androidTest/java/tech/jknair/app", "app/src/test/java/tech/jknair/app"]
-    projectNameTemplate = "##projectName##"
-    projectNameLowerTemplate = "##project_name##"
+    projectNameTemplate = "##ProjectName##"
+    projectNameLowerTemplate = "##projectname##"
     valid_file_exts = ["xml", "java", "kt", "kts", "gradle"]
     
     def __init__(self, projectName, projectDest):

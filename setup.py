@@ -1,4 +1,4 @@
-from file_utils import join_path, list_recursively, delete_recursive, exists, rename
+from file_utils import join_path, list_recursively, delete_recursive, rename, delete
 from git_utils import clone_repo
 from log_utils import log
 
@@ -70,6 +70,7 @@ git_root = join_path(projectDest, ".git")
 delete_recursive(git_root)
 idea_root = join_path(projectDest, ".idea")
 delete_recursive(idea_root)
+delete(join_path(projectDest, "README.md"))
 
 ApplicationSetup(projectName, projectDest).run()
 

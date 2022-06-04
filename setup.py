@@ -4,8 +4,7 @@ from log_utils import log
 
 class ApplicationSetup:
 
-    src_package_relative_path = "app/src/main/java/tech/jknair/app"
-    application_file = "app/src/main/java/tech/jknair/app/ui/App.kt"
+    src_dirs_rel_path = ["app/src/main/java/tech/jknair/app", "app/src/androidTest/java/tech/jknair/app", "app/src/test/java/tech/jknair/app"]
     projectNameTemplate = "##projectName##"
     projectNameLowerTemplate = "##project_name##"
     valid_file_exts = ["xml", "java", "kt", "kts", "gradle"]
@@ -28,7 +27,6 @@ class ApplicationSetup:
         if splits[-1] not in self.valid_file_exts:
             log("ignoring file: " + file_path)
             return
-        # log("checking file: " + file_path)
         with open(file_path, 'r') as fr:
             file_content = fr.read()
         updated_file_content = self.__replace_templates(file_content) 
@@ -52,11 +50,13 @@ class ApplicationSetup:
         self.__change_package_name_post_fix()
 
     def __change_package_name_post_fix(self):
-        srcPackage = join_path(self.projectDest, self.src_package_relative_path)
-        rename(srcPackage, join_path(projectDest, "app/src/main/java/tech/jknair/" + self.projectNameLower))
+        for srcPath in self.src_dirs_rel_path:
+            srcPackage = join_path(self.projectDest, srcPath)
+            desPathPrefix = srcPath.replace("/app", "/")
+            rename(srcPackage, join_path(projectDest, desPathPrefix + self.projectNameLower))
     
     def __change_application_class_name(self):
-        application_file_path = join_path(self.projectDest, self.application_file)
+        application_file_path = join_path(self.projectDest, "app/src/main/java/tech/jknair/app/ui/App.kt")
         destination = join_path(self.projectDest, "app/src/main/java/tech/jknair/app/ui/"+self.projectName+"App.kt")
         rename(application_file_path, destination)
 

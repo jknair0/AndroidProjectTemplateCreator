@@ -1,6 +1,6 @@
 import os
-from re import sub
 from shutil import rmtree
+from log_utils import log
 
 def list_recursively(directory_path):
     if not exists(directory_path):
@@ -10,9 +10,11 @@ def list_recursively(directory_path):
             yield os.path.join(root, file)
 
 
-def delete_recursive(directory_path):
+def delete_recursive(directory_path, verbose = True):
     if not exists(directory_path):
         return
+    if verbose:
+        log("deleting {}".format(directory_path))
     rmtree(directory_path)
 
 def join_path(rootPath, subPath):
@@ -25,7 +27,10 @@ def join_path(rootPath, subPath):
 def exists(path):
     return os.path.exists(path)
 
-def rename(fromFileOrDir, toFileOrDir):
+def rename(fromFileOrDir, toFileOrDir, verbose = True):
     if not exists(fromFileOrDir):
+        log("rename failed: {} to {}".format(fromFileOrDir, toFileOrDir))
         return
+    if verbose:
+        log("renaming {} to {}".format(fromFileOrDir, toFileOrDir))
     os.rename(fromFileOrDir, toFileOrDir)
